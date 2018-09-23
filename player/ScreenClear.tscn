@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://particles/square.png" type="Texture" id=1]
+
+[sub_resource type="Shader" id=6]
+
+code = "shader_type canvas_item;
+
+uniform vec2 center;
+uniform float t = 0;
+
+float convert(float mag)
+{
+	if (abs(mag - t) > 0.2)
+		return mag;
+	return (1.0-pow(0.2-abs(t-mag),0.9))*mag;
+}
+
+vec4 to_white(vec4 color)
+{
+	float tt = t;
+	if (tt > 0.5)
+		tt = 1.0 - tt;
+	return (1.0-tt) * color + tt*vec4(1,1,1,1);
+}
+void fragment()
+{
+	vec2 dir = normalize(SCREEN_UV - center);
+	float mag = length(SCREEN_UV - center);
+	vec4 c = textureLod(SCREEN_TEXTURE,center + convert(mag) * dir,0.0);
+	COLOR = to_white(c);
+}	
+
+
+"
+
+[sub_resource type="ShaderMaterial" id=7]
+
+render_priority = 0
+shader = SubResource( 6 )
+shader_param/center = null
+shader_param/t = null
+_sections_unfolded = [ "Resource" ]
+
+[sub_resource type="GDScript" id=5]
+
+script/source = "extends Sprite
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+var t = 0
+
+func _ready():
+	var x = global_position.x
+	var y = global_position.y
+	var global = get_node(\"/root/Global\")
+	material.set_shader_param(\"center\",Vector2((x+global.WIDTH * 0.5) / OS.window_size.x,(y+global.HEIGHT * 0.5) / OS.window_size.y))
+
+func _process(delta):
+	t += delta * 0.6
+	if (t > 0.35):
+		get_tree().call_group(\"pattern\",\"reset\",true)
+	if t > 1:
+		queue_free()
+	material.set_shader_param(\"t\",t);"
+_sections_unfolded = [ "Resource" ]
+
+[node name="ScreenClear" type="Sprite" index="0"]
+
+material = SubResource( 7 )
+scale = Vector2( 600, 750 )
+z_index = 99
+texture = ExtResource( 1 )
+centered = false
+script = SubResource( 5 )
+_sections_unfolded = [ "Material", "Transform" ]
+
+

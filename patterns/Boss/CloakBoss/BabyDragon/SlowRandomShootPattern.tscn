@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../../Pattern.gd\"
+
+export var speed = 100
+
+func make_pattern():
+	var dir = global.player.global_position - global_position
+	var b = newBullet()
+	b.velocity = speed * dir.normalized()
+	bullets.append(b) 
+"
+
+[node name="SlowRandomShootPattern" type="Node2D"]
+
+script = SubResource( 1 )
+shoot_interval = 3.5
+interval_randomness = 1.0
+shoot_delay = 0.0
+slow_affects_shot_rate = true
+sped_up_length = 0.0
+bullet_radius = 7
+color = null
+shade = 0
+speed = 100
+
+

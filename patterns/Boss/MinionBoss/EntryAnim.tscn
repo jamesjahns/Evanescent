@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../BossAnimation.gd\"
+
+func _ready():
+	boss.move_to(Vector2(300,100))
+	boss.animation.play(\"entry\")
+"
+
+[node name="EntryAnim" type="Node2D"]
+
+script = SubResource( 1 )
+length = 1.0

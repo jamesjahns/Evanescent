@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=2]
+
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"res://patterns/Pattern.gd\"
+
+
+func _ready():
+	for i in range (global.HEIGHT / 32 + 1):
+		var b = Bullet.new()
+		b.pos = Vector2(0,i * 32)
+		b.velocity = Vector2(0,32)
+		bullets.append(b)
+
+func make_pattern():
+	var b = Bullet.new()
+	b.velocity = Vector2(0,32)
+	bullets.append(b)"
+
+[node name="BulletSheet" type="Node2D"]
+
+script = SubResource( 1 )
+shoot_interval = 1.0
+shoot_delay = 0.0
+texture = 0
+color = 0

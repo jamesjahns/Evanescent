@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://patterns/Boss/CloakBoss/FromAbove.gd" type="Script" id=1]
+[ext_resource path="res://patterns/Boss/CloakBoss/Snake.gd" type="Script" id=2]
+
+[node name="SnakingPattern" type="Node2D"]
+
+[node name="FromBelow" type="Node2D" parent="." index="0"]
+
+script = ExtResource( 1 )
+shoot_interval = 0.2
+interval_randomness = 0.0
+shoot_delay = 0.0
+slow_affects_shot_rate = true
+sped_up_length = 0.0
+bullet_radius = 7
+color = Color( 0.827451, 0.776471, 0.494118, 1 )
+shade = 0
+
+[node name="Snake" type="Node2D" parent="." index="1"]
+
+script = ExtResource( 2 )
+shoot_interval = 0.2
+interval_randomness = 0.0
+shoot_delay = 0.0
+slow_affects_shot_rate = false
+sped_up_length = 1.0
+bullet_radius = 7
+color = Color( 0.337255, 0.729412, 0.301961, 1 )
+shade = 1
+lifetime_lim = 30.0
+lasts_forever = false
+destroy_on_path_end = false
+
+

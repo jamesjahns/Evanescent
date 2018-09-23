@@ -1,0 +1,95 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../Pattern.gd\"
+
+
+var dirs = [Vector2(0.3,-1).normalized(),Vector2(0,-1),Vector2(-0.3,-1).normalized(),Vector2(0,-1)]
+var current_dir = PI
+export var speed = 120
+
+const TURN_SPEED = 0.3
+
+var lifetime = 0
+
+class LTBullet:
+	var pos = Vector2()
+	var velocity = Vector2()
+	var accel = Vector2()
+	var lifetime = 0.0
+	var index = 0
+
+func newBullet():
+	var b = LTBullet.new()
+	b.pos = parent.position
+	return b
+
+func rot_pos(t):
+	#magic num is 1 / tan(0.5)
+	return 1.8305 * PI * -tan(t-0.5)-PI / 2
+	#return -8 * PI * (t- 0.5) * (t-0.5) * (t-0.5) - PI / 2
+
+func move_bullet(bullet,delta):
+	bullet.lifetime += delta * 0.35
+	.move_bullet(bullet,delta)
+
+func make_pattern():
+	while(lifetime > 1):
+		lifetime -= 1
+	var dir = Vector2(1,0).rotated(rot_pos(lifetime))
+	for i in range(3):
+		var b = newBullet()
+		b.velocity = dir.rotated((randf()-0.5)*0.7) * speed
+		bullets.append(b)
+
+func _process_with_slow(delta):
+	lifetime += delta * TURN_SPEED
+	
+
+func check_outofbounds(bullet):
+	var _pos = true_pos(bullet)
+	if((_pos.x < 0 and bullet.velocity.x < 0) or (_pos.x > global.WIDTH and bullet.velocity.x > 0)):
+		if(bullet.index >= 1):
+			bullets.erase(bullet)
+		bullet.velocity *= 0.5
+		bullet.index += 1
+		bullet.velocity.x *= -1
+	if((_pos.y < 0 and bullet.velocity.y < 0) or (_pos.y > global.HEIGHT and bullet.velocity.y > 0)):
+		if(bullet.index >= 1):
+			bullets.erase(bullet)
+		bullet.velocity *= 0.5
+		bullet.index += 1
+		bullet.velocity.y *= -1
+
+"
+
+[node name="FirebreathingPattern" type="Node2D"]
+
+[node name="FireBreath" type="Node2D" parent="." index="0"]
+
+script = SubResource( 1 )
+shoot_interval = 0.3
+interval_randomness = 0.0
+shoot_delay = 0.0
+slow_affects_shot_rate = true
+sped_up_length = 0.0
+bullet_radius = 7
+color = Color( 0.827451, 0.776471, 0.494118, 1 )
+shade = 0
+speed = 120
+
+[node name="FireBreath1" type="Node2D" parent="." index="1"]
+
+script = SubResource( 1 )
+shoot_interval = 0.3
+interval_randomness = 0.0
+shoot_delay = 0.15
+slow_affects_shot_rate = true
+sped_up_length = 0.0
+bullet_radius = 7
+color = Color( 0.345098, 0.729412, 0.301961, 1 )
+shade = 1
+speed = 120
+
+

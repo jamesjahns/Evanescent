@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://StartMenu/eyes2.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Area2D
+
+var counter = 0
+var face = 0
+onready var sprite = get_node(\"Sprite\")
+
+func _ready():
+	face = randi() % 8
+	sprite.modulate = Color(1,1,1,0)
+	connect(\"area_entered\",self,\"on_area_enter\")
+
+
+
+func _on_Timer_timeout():
+	counter+=1
+	if counter < 4:
+		sprite.frame = 4 - counter + 4*face
+		sprite.modulate = Color(1,1,1,(counter)/4.0)
+	elif counter < 8:
+		sprite.frame = 4*face
+		sprite.modulate = Color(1,1,1,1)
+	elif counter < 12:
+		sprite.frame = (counter - 8) + 4*face
+		sprite.modulate = Color(1,1,1,(12-counter)/4.0)
+	else:
+		queue_free()
+
+func on_area_enter(area):
+	var c = area.get(\"counter\")
+	if c == null or c > counter:
+		queue_free()
+
+
+"
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 40.5235, 36.1455 )
+
+[node name="eyes" type="Area2D"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+self_modulate = Color( 1, 1, 1, 0.690627 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 1 )
+vframes = 8
+hframes = 4
+_sections_unfolded = [ "Animation", "Offset", "Transform", "Visibility" ]
+
+[node name="Timer" type="Timer" parent="." index="1"]
+
+process_mode = 1
+wait_time = 0.1
+one_shot = false
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+
+shape = SubResource( 2 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+

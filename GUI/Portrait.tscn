@@ -1,0 +1,396 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://GUI/portrait_bg.png" type="Texture" id=1]
+[ext_resource path="res://GUI/frame.png" type="Texture" id=2]
+[ext_resource path="res://GUI/TextBox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://particles/simple_particle.png" type="Texture" id=4]
+[ext_resource path="res://GUI/portraits/red.tscn" type="PackedScene" id=5]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Node2D
+
+const COLORS = [Color(0.71,0.15,0.24,1),Color(\"80e880\")]
+const PARTICLE_COLORS = [Color(\"d85066\"),Color(\"bce5bc\")]
+var messages = []
+var id = 0
+var char_id = 0
+onready var character = get_node(\"char\")
+onready var text_box = get_node(\"TextBox\")
+
+
+func _ready():
+	add_to_group(\"portrait\")
+	var file = File.new()
+	file.open(\"res://stages/stage_1/messages.json\", file.READ)
+	messages = parse_json(file.get_as_text() )
+			
+			
+func start_message(_id):
+	_id = int(_id)
+	id = _id
+	text_box.set_text(messages[id][\"msg\"])
+	if char_id != messages[id][\"char_id\"]:
+		change_char(messages[id][\"char_id\"])
+		text_box.change_color(COLORS[messages[id][\"char_id\"]])
+	else:
+		disp_message()
+	char_id = messages[id][\"char_id\"]
+
+func disp_message():
+	text_box.disp_text()
+
+func end_message():
+	get_tree().call_group(\"events\",\"msg_end\",id)
+	start_message(messages[id][\"go_to\"])
+	
+
+func change_char(i):
+	var anim = get_node(\"change_char\").get_animation(\"change_char\")
+	character.character = i
+	anim.track_set_key_value(0,3,COLORS[i])
+	anim.track_set_key_value(2,0,PARTICLE_COLORS[i])
+	get_node(\"change_char\").play(\"change_char\")
+"
+
+[sub_resource type="Animation" id=2]
+
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("frame/heads/head2:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -2, -626 ), Vector2( -2, -201 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("frame/heads/head3:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 372, -475 ), Vector2( 72, -175 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("frame/heads/head1:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -379, -474 ), Vector2( -79, -174 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("frame/heads:modulate")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.304688, 0.304688, 0.304688, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+
+resource_name = "change_char"
+length = 0.6
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("bg:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.713726, 0.14902, 0.239216, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0.713726, 0.14902, 0.239216, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Particles2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Particles2D:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.847059, 0.313726, 0.4, 1 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "disp_message"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("char:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("char")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "next_char"
+} ]
+}
+
+[sub_resource type="Gradient" id=4]
+
+offsets = PoolRealArray( 0, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=5]
+
+flags = 4
+gradient = SubResource( 4 )
+width = 2048
+
+[sub_resource type="Curve" id=6]
+
+min_value = 0.0
+max_value = 1.0
+bake_resolution = 100
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.49781 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+
+flags = 4
+width = 2048
+curve = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=8]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 1
+emission_sphere_radius = 128.0
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 90.0
+flatness = 1.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 250.0
+initial_velocity_random = 0.0
+angular_velocity = 0.0
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 100.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 1.0
+scale_random = 0.0
+scale_curve = SubResource( 7 )
+color_ramp = SubResource( 5 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Angle", "Color", "Damping", "Emission Shape", "Hue Variation", "Initial Velocity", "Scale", "Spread" ]
+
+[sub_resource type="GDScript" id=9]
+
+script/source = "extends Node2D
+var character = 0
+var portraits = [preload(\"portraits/red.tscn\"),preload(\"portraits/green.tscn\")]
+
+func next_char():
+	print(\"a\")
+	for c in get_children():
+		c.queue_free()
+	add_child(portraits[character].instance())"
+
+[node name="Portrait" type="Node2D" index="0"]
+
+scale = Vector2( 0.3, 0.3 )
+script = SubResource( 1 )
+_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
+
+[node name="bg" type="Sprite" parent="." index="0"]
+
+self_modulate = Color( 0.713726, 0.14902, 0.239216, 1 )
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
+
+[node name="enter" type="AnimationPlayer" parent="." index="1"]
+
+root_node = NodePath("..")
+autoplay = "enter"
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/enter = SubResource( 2 )
+blend_times = [  ]
+
+[node name="frame" type="Sprite" parent="." index="2"]
+
+position = Vector2( -5.33054, -32.7528 )
+scale = Vector2( 2.05205, 2.05205 )
+z_index = 2
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 444, 124, 366, 395.198 )
+_sections_unfolded = [ "Animation", "Region", "Transform", "Z Index" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="heads" type="Node2D" parent="frame" index="0"]
+
+_sections_unfolded = [ "Material", "Visibility" ]
+
+[node name="head2" type="Sprite" parent="frame/heads" index="0"]
+
+position = Vector2( -2, -201 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 577, 0, 97, 93.482 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="head1" type="Sprite" parent="frame/heads" index="1"]
+
+position = Vector2( -79, -174 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 474, 49.198, 94, 80 )
+_sections_unfolded = [ "Region", "Transform" ]
+
+[node name="head3" type="Sprite" parent="frame/heads" index="2"]
+
+position = Vector2( 72, -175 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 682, 52, 96, 75 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="change_char" type="AnimationPlayer" parent="." index="3"]
+
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/change_char = SubResource( 3 )
+blend_times = [  ]
+
+[node name="TextBox" parent="." index="4" instance=ExtResource( 3 )]
+
+position = Vector2( -12.4407, -632.517 )
+scale = Vector2( 2.8, 2.8 )
+z_index = 99
+_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
+
+[node name="Particles2D" type="Particles2D" parent="." index="5"]
+
+self_modulate = Color( 0.847059, 0.313726, 0.4, 1 )
+position = Vector2( 0, 50 )
+rotation = -1.5708
+emitting = true
+amount = 256
+lifetime = 1.0
+one_shot = false
+preprocess = 1.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = false
+draw_order = 0
+process_material = SubResource( 8 )
+texture = ExtResource( 4 )
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time", "Transform", "Visibility", "Z Index" ]
+
+[node name="char" type="Node2D" parent="." index="6"]
+
+script = SubResource( 9 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="red" parent="char" index="0" instance=ExtResource( 5 )]
+
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+

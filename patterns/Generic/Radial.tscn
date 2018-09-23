@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../RadialPattern.gd\"
+
+export var bullet_num = 5
+export var speed = 200
+export var rot_speed = 0.0
+export var spin = 0.0
+export var rot = 0.0
+var current_rot = 0.0
+func make_pattern():
+	for i in range(bullet_num):
+		var b = newBullet()
+		b.velocity = speed
+		b.angle = PI * 2 * i / bullet_num + rot
+		bullets.append(b)
+
+func _process_with_slow(delta):
+	current_rot += spin * delta
+	rot += delta * rot_speed
+
+func move_bullet(bullet,delta):
+	bullet.magnitude += bullet.velocity * delta
+	bullet.pos = bullet.center + bullet.magnitude * Vector2(cos(bullet.angle + current_rot),sin(bullet.angle + current_rot))
+
+"
+
+[node name="Radial" type="Node2D"]
+
+script = SubResource( 1 )
+shoot_interval = 1.0
+interval_randomness = 0.0
+shoot_delay = 0.0
+slow_affects_shot_rate = true
+bullet_radius = 7
+color = null
+shade = 0
+bullet_num = 5
+speed = 200
+rot_speed = 0.0
+spin = 0.0
+rot = 0.0
+
+

@@ -1,0 +1,230 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://GUI/monster_health.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Node2D
+
+onready var global = get_node(\"/root/Global\")
+var health = 0
+const WIDTH = 390
+const HEIGHT = 30
+var drawn_health = 0.0
+const DRAW_SPEED  = 50
+var max_health = 1
+
+const BAR_WIDTH = 499
+const BAR_HEIGHT = 83
+
+onready var bar = get_node(\"bar_bg/bar\")
+onready var region = bar.get_region_rect()
+
+func _ready():
+	add_to_group(\"boss_health\")
+	set_process(true)
+
+func _process(delta):
+	if(drawn_health >= health):
+		drawn_health = health
+	else:
+		drawn_health += delta * DRAW_SPEED
+
+	region = Rect2(region.position.x,region.position.y,1.0*drawn_health/max_health * BAR_WIDTH,BAR_HEIGHT)
+	bar.set_region_rect(region)
+	
+
+func set_max(h):
+	max_health = h
+	health = h
+	drawn_health = 0.0
+
+func set_health(h):
+	health = h"
+
+[sub_resource type="Animation" id=2]
+
+length = 2.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -40 ), Vector2( 0, -48 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("left_hand:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -230, -5 ), Vector2( -240, -5 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("right_hand:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 240, -5 ), Vector2( 250, -5 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("bar_bg:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -8, 5 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("head:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -100 ), Vector2( 0, -109 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("head/eyes:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 5, 30 ) ]
+}
+
+[node name="monster_health" type="Node2D" index="0"]
+
+scale = Vector2( 0.6, 0.6 )
+script = SubResource( 1 )
+
+[node name="body" type="Sprite" parent="." index="0"]
+
+position = Vector2( 0, -45.7666 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 374, 287, 356, 180 )
+
+[node name="left_hand" type="Sprite" parent="." index="1"]
+
+position = Vector2( -237.208, -5 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 233, 63, 185, 170 )
+
+[node name="left_fingers" type="Sprite" parent="left_hand" index="0"]
+
+position = Vector2( -10.9496, 8.59424 )
+z_index = 1
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 246, 246, 133, 165 )
+_sections_unfolded = [ "Z Index" ]
+
+[node name="right_hand" type="Sprite" parent="." index="2"]
+
+position = Vector2( 247.208, -5 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 704, 62, 206, 162 )
+
+[node name="right_fingers" type="Sprite" parent="right_hand" index="0"]
+
+position = Vector2( -4.70038, 11.2694 )
+z_index = 1
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 738, 236, 130, 184 )
+_sections_unfolded = [ "Z Index" ]
+
+[node name="bar_bg" type="Sprite" parent="." index="3"]
+
+position = Vector2( -8, 5 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 263, 470, 582, 153 )
+
+[node name="bar_back" type="Sprite" parent="bar_bg" index="0"]
+
+self_modulate = Color( 1, 1, 1, 0.508196 )
+position = Vector2( -235.04, 17.5652 )
+texture = ExtResource( 1 )
+centered = false
+offset = Vector2( -11.271, -49.8968 )
+region_enabled = true
+region_rect = Rect2( 307, 636, 499, 83 )
+
+[node name="bar" type="Sprite" parent="bar_bg" index="1"]
+
+position = Vector2( -235.04, 17.5652 )
+texture = ExtResource( 1 )
+centered = false
+offset = Vector2( -11.271, -49.8968 )
+region_enabled = true
+region_rect = Rect2( 307, 636, 499, 83 )
+
+[node name="sheen" type="Sprite" parent="bar_bg" index="2"]
+
+position = Vector2( 8.33063, 7.70157 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 850, 480, 560, 150 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="head" type="Sprite" parent="." index="4"]
+
+position = Vector2( 0, -106.487 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 437, 28, 250, 250 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="eyes" type="Sprite" parent="head" index="0"]
+
+position = Vector2( 5, 30 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 56, 92, 150, 100 )
+
+[node name="anim" type="AnimationPlayer" parent="." index="5"]
+
+root_node = NodePath("..")
+autoplay = "idle"
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/idle = SubResource( 2 )
+blend_times = [  ]
+
+

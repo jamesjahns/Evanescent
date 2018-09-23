@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=2]
+
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"res://patterns/Pattern.gd\"
+
+export var speed = 80
+export var width =  70
+export var bullet_num = 30
+export var index = 0
+
+func make_pattern():
+	var b = newBullet()
+	b.velocity = Vector2(0,speed)
+	b.pos = Vector2(sin(PI * (2 * index - bullet_num) / bullet_num) * width,0)
+	index += 1
+	if (index >= bullet_num):
+		index = 0
+	bullets.append(b)
+"
+
+[node name="SineWave" type="Node2D"]
+
+script = SubResource( 1 )
+shoot_interval = 1.0
+shoot_delay = 0.0
+texture = 0
+color = 0
+speed = 80
+width = 70
+bullet_num = 30
+index = 0

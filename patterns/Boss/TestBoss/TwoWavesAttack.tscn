@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://patterns/TestBoss/SineWave.tscn" type="PackedScene" id=1]
+[ext_resource path="res://patterns/TestBoss/BulletSheet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://patterns/TestBoss/TriShooter.tscn" type="PackedScene" id=3]
+
+[node name="TwoWavesAttack" type="Node2D"]
+
+
+[node name="SineWaveRed" parent="." instance=ExtResource( 1 )]
+
+position = Vector2( 442, 50 )
+shoot_interval = 0.2
+bullet_num = 20
+
+[node name="SineWaveBlue" parent="." instance=ExtResource( 1 )]
+
+position = Vector2( 582, 50 )
+shoot_interval = 0.2
+texture = 1
+color = 1
+bullet_num = 20
+index = 10
+
+[node name="BulletSheet" parent="." instance=ExtResource( 2 )]
+
+position = Vector2( 347, 0 )
+texture = 1
+color = 1
+
+[node name="BulletSheet1" parent="." instance=ExtResource( 2 )]
+
+position = Vector2( 677, 0 )
+
+[node name="TriShooterBlue" parent="." instance=ExtResource( 3 )]
+
+position = Vector2( 105, 230 )
+shoot_interval = 2.0
+texture = 1
+color = 1
+
+[node name="TriShooterBlue1" parent="." instance=ExtResource( 3 )]
+
+position = Vector2( 105, 530 )
+shoot_interval = 2.0
+texture = 1
+color = 1
+
+[node name="TriShooterRed" parent="." instance=ExtResource( 3 )]
+
+position = Vector2( 919, 230 )
+shoot_interval = 2.0
+shoot_delay = 1.0
+
+[node name="TriShooterRed1" parent="." instance=ExtResource( 3 )]
+
+position = Vector2( 919, 530 )
+shoot_interval = 2.0
+shoot_delay = 1.0

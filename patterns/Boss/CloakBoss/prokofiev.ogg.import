@@ -1,0 +1,18 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/prokofiev.ogg-e4b3b07892dd6ea470b2ac242fa1c352.oggstr"
+
+[deps]
+
+source_file="res://patterns/Boss/CloakBoss/prokofiev.ogg"
+source_md5="2381be016d296bcd41a821f42e033322"
+
+dest_files=[ "res://.import/prokofiev.ogg-e4b3b07892dd6ea470b2ac242fa1c352.oggstr" ]
+dest_md5="e9cdf2d566c27f09773b2f532ddcfcc8"
+
+[params]
+
+loop=true
+loop_offset=0

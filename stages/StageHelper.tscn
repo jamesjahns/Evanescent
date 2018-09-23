@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://stages/stage_size.png" type="Texture" id=1]
+
+[node name="StageHelper" type="Sprite"]
+
+position = Vector2( -10, -10 )
+texture = ExtResource( 1 )
+offset = Vector2( 275.093, 374.557 )
+
+

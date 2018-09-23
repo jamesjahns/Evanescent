@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://patterns/Generic/Explosion.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Node2D
+
+var pos_timer = 0
+var boss
+
+var positions = [Vector2(30,100),Vector2(470,100),Vector2(250,150)]
+var index = 0
+
+func _ready():
+	
+	set_process(true)
+
+func _process(delta):
+	pos_timer += delta
+	if (pos_timer > 3):
+		pos_timer -= 3
+	
+	set_pos(boss.get_pos())
+
+func set_boss(val):
+	boss = val
+
+func on_timer_timeout():
+	boss.move_to(positions[index])
+	index += 1
+	if(index == 3):
+		index = 0
+
+func destroy():
+	queue_free()"
+
+[node name="OpeningPattern_Explode" type="Node2D" groups=[
+"pattern",
+]]
+
+script = SubResource( 1 )
+
+[node name="Explosion" parent="." instance=ExtResource( 1 )]
+
+shoot_interval = 0.7
+texture = 1
+color = 1
+num_bullets = 50
+min_speed = 150
+max_speed = 300
+max_angle = 360
+
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = true
+
+[connection signal="timeout"  from="Timer"  to="." method="on_timer_timeout" binds=[  ]]

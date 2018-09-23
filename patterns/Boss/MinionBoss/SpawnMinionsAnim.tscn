@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=2]
+
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../BossAnimation.gd\"
+
+var minion = preload(\"FollowMinion.tscn\")
+
+func _ready():
+	boss.move_to(Vector2(300,100))
+	var m1 = minion.instance()
+	var m2 = minion.instance()
+	m1.set_pos(Vector2(200,100))
+	m2.set_pos(Vector2(400,100))
+	parent.add_child(m1)
+	parent.add_child(m2)
+	
+"
+
+[node name="SpawnMinionsAnim" type="Node2D"]
+
+script = SubResource( 1 )
+length = 1

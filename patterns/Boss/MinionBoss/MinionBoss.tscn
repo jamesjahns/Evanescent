@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://patterns/Boss/MinionBoss/MinionBoss.png" type="Texture" id=1]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 79.7574
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "extends \"../Boss.gd\"
+
+onready var animation = get_node(\"anim\")
+
+func get_attacks():
+	return [preload(\"../TestBoss/SpirographPattern.tscn\"),preload(\"UncurlingCirclePattern.tscn\"),preload(\"OpeningPattern_Explode.tscn\"),preload(\"OpeningPattern_Explode.tscn\")]
+
+func get_health():
+	return [50,50]
+
+func get_anim():
+	return [preload(\"EntryAnim.tscn\"),preload(\"SpawnMinionsAnim.tscn\"),preload(\"EntryAnim.tscn\")]
+	"
+
+[sub_resource type="Animation" id=3]
+
+resource_name = "entry"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
+}
+
+[node name="MinionBoss" type="Area2D" groups=[
+"boss",
+]]
+
+input_pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Transform2D( 1, 0, 0, 1, -6.02936, -9.04402 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script = SubResource( 2 )
+interp_length = 0.5
+
+[node name="Sprite" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+offset = Vector2( -0.0725403, -32.1846 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+position = Vector2( -6.02936, -9.04402 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="anim" type="AnimationPlayer" parent="."]
+
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+root_node = NodePath("..")
+anims/entry = SubResource( 3 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""

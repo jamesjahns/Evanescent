@@ -1,0 +1,190 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../Pattern.gd\"
+
+export var left = true
+export var right = true
+
+onready var half = global.from_relative_pos(Vector2(0.5,0)).x
+
+export var SPEED = 200
+
+var slow
+
+class LBullet:
+	var pos = Vector2()
+	var velocity = Vector2()
+	var last_pos = Vector2(0,-30)
+
+func make_pattern():
+	if(left):
+		var x = randf() * 0.5
+		var b = LBullet.new()
+		b.pos = global.from_relative_pos(Vector2(x,0))
+		b.velocity = SPEED * Vector2(0,1)
+		bullets.append(b)
+	if(right):
+		var x = randf() * 0.5 + 0.5
+		var b = LBullet.new()
+		b.pos = global.from_relative_pos(Vector2(x,0))
+		b.velocity = SPEED * Vector2(0,1)
+		bullets.append(b)
+
+func _process(delta):
+	if (global.slow_light and shade == BULLET_SHADE.LIGHT) or (global.slow_dark and shade == BULLET_SHADE.DARK):
+		slow = true
+	else:
+		slow = false
+
+func move_bullet(bullet,delta):
+	return
+	
+func update_bullets(delta):
+	if slow:
+		delta *= BULLET_SLOW_AMT
+	for bullet in bullets:
+		bullet.last_pos = bullet.pos
+		bullet.pos += bullet.velocity * delta
+
+func add_bullet(bullet):
+	var b = LBullet.new()
+	b.pos = bullet.pos
+	b.last_pos = bullet.pos
+	b.velocity = Vector2(0,1) * SPEED
+	bullets.append(b)
+"
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "extends Node2D
+
+#this is very spaghetti
+
+var tentacles = []
+var shade_counter = 0
+var left = true
+
+onready var global = get_node(\"/root/Global\")
+onready var half = global.from_relative_pos(Vector2(0.5,0)).x
+onready var tentacle = preload(\"Tentacle.tscn\")
+onready var origin = -get_parent().position
+
+export(NodePath) var small_bullets_path
+export(NodePath) var large_bullets_path
+onready var small_bullets = get_node(small_bullets_path)
+onready var large_bullets = get_node(large_bullets_path)
+const SPEED = 90
+
+# true = small left, false = large left
+var small_left = [ false, false, true, true]
+var small_right = [true, false, false, true]
+
+func _ready():
+	add_to_group(\"pattern\")
+	set_process(true)
+	_on_Timer_timeout()
+	
+func check_passed(t,bullet):
+	var t_pos = t.position + get_parent().position
+	if (t_pos.x <= half) == (bullet.pos.x <= half):
+		#if tentacle just passed
+		if bullet.last_pos.y < t_pos.y and bullet.pos.y >= t_pos.y:
+			return true
+	return false
+
+func _process(delta):
+	for t in tentacles:
+		t.translate(Vector2(0,1) * SPEED * delta)
+		if t.position.y > global.HEIGHT:
+			tentacles.erase(t)
+			t.queue_free()
+	
+	if small_bullets == null:
+		return
+	for b in small_bullets.bullets:
+		for t in tentacles:
+			if t.shade == 0:
+				continue
+			if check_passed(t,b):
+				large_bullets.add_bullet(b)
+				small_bullets.bullets.erase(b)
+	for b in large_bullets.bullets:
+		for t in tentacles:
+			if t.shade == 1:
+				continue
+			if check_passed(t,b):
+				small_bullets.add_bullet(b)
+				large_bullets.bullets.erase(b)
+	small_bullets.update_bullets(delta)
+	large_bullets.update_bullets(delta)
+
+func _on_Timer_timeout():
+	var t = tentacle.instance()
+	var p = origin
+	var x = 0
+	if(!left):
+		p.x += half * 2
+		t.rotation += PI
+	t.position = p
+	t.shade = shade_counter / 2
+	left = !left
+	tentacles.append(t)
+	add_child(t)
+	
+	small_bullets.left = small_left[shade_counter]
+	small_bullets.right = small_right[shade_counter]
+	large_bullets.left = !small_left[shade_counter]
+	large_bullets.right = !small_right[shade_counter]
+	shade_counter = (shade_counter + 1) % 4
+
+func destroy():
+	queue_free()"
+
+[node name="TentaclePattern" type="Node2D"]
+
+[node name="SmallBullets" type="Node2D" parent="." index="0"]
+
+script = SubResource( 1 )
+shoot_interval = 0.1
+interval_randomness = 0.0
+shoot_delay = 0.1
+slow_affects_shot_rate = true
+bullet_radius = 7
+color = Color( 0.827451, 0.776471, 0.494118, 1 )
+shade = 0
+left = true
+right = true
+SPEED = 200
+
+[node name="LargeBullets" type="Node2D" parent="." index="1"]
+
+script = SubResource( 1 )
+shoot_interval = 0.1
+interval_randomness = 0.0
+shoot_delay = 0.1
+slow_affects_shot_rate = true
+bullet_radius = 14
+color = Color( 0.341176, 0.729412, 0.301961, 1 )
+shade = 1
+left = false
+right = false
+SPEED = 150
+
+[node name="TentacleHandler" type="Node2D" parent="." index="2"]
+
+script = SubResource( 2 )
+small_bullets_path = NodePath("../SmallBullets")
+large_bullets_path = NodePath("../LargeBullets")
+
+[node name="Timer" type="Timer" parent="TentacleHandler" index="0"]
+
+process_mode = 1
+wait_time = 3.0
+one_shot = false
+autostart = true
+
+[connection signal="timeout" from="TentacleHandler/Timer" to="TentacleHandler" method="_on_Timer_timeout"]
+
+

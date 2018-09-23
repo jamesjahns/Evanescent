@@ -1,0 +1,32 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/bullet (1).png-edacba6ea72da31225928c6e8c490367.stex"
+
+[deps]
+
+source_file="res://player/bullet (1).png"
+source_md5="eee16a240319b7cce521abd8297bb3d8"
+
+dest_files=[ "res://.import/bullet (1).png-edacba6ea72da31225928c6e8c490367.stex" ]
+dest_md5="fe3ec655836813567a59d8f613d4ed99"
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0

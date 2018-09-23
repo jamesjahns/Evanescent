@@ -1,0 +1,32 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/Big tent.png-8dd7ece95a1332c927edc612c80e90a7.stex"
+
+[deps]
+
+source_file="res://patterns/Boss/CloakBoss/graphics/Big tent.png"
+source_md5="a735ec2f3df3c7dcd57d784d61ffb214"
+
+dest_files=[ "res://.import/Big tent.png-8dd7ece95a1332c927edc612c80e90a7.stex" ]
+dest_md5="478ffb31ae7512e32aa386eeb8bb7170"
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0

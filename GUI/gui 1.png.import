@@ -1,0 +1,32 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/gui 1.png-672af21236db2bef7f88c27b3d929291.stex"
+
+[deps]
+
+source_file="res://GUI/gui 1.png"
+source_md5="4826d1c47b4d68d1f50f1b37aa58afd6"
+
+dest_files=[ "res://.import/gui 1.png-672af21236db2bef7f88c27b3d929291.stex" ]
+dest_md5="8e50c0751bac4e201f381a69a61d43b3"
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0

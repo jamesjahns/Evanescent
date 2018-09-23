@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"res://patterns/Pattern.gd\"
+
+var count = 0
+
+func make_pattern():
+	count+=1
+	if count > 3:
+		if len(bullets) == 0:
+			queue_free()
+		return
+	for i in range(10):
+		var b = newBullet()
+		b.pos += global.from_relative_pos(Vector2(i / 20.0,0))
+		b.velocity = Vector2(0,100)
+		bullets.append(b)"
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "extends \"res://patterns/Pattern.gd\"
+
+var count = 0
+
+func make_pattern():
+	count+=1
+	if count > 3:
+		if len(bullets) == 0:
+			queue_free()
+		return
+	for i in range(10):
+		var b = newBullet()
+		b.pos += global.from_relative_pos(Vector2(0.5+i / 20.0,0))
+		b.velocity = Vector2(0,100)
+		bullets.append(b)
+"
+
+[node name="PracticePattern" type="Node2D"]
+
+[node name="LeftPattern" type="Node2D" parent="." index="0"]
+
+script = SubResource( 1 )
+shoot_interval = 2.0
+interval_randomness = 0.0
+shoot_delay = 0.0
+slow_affects_shot_rate = true
+sped_up_length = 0.0
+bullet_radius = 14
+color = Color( 0.910156, 0.869048, 0.252426, 1 )
+shade = 0
+
+[node name="RightPattern" type="Node2D" parent="." index="1"]
+
+script = SubResource( 2 )
+shoot_interval = 2.0
+interval_randomness = 0.0
+shoot_delay = 0.0
+slow_affects_shot_rate = true
+sped_up_length = 0.0
+bullet_radius = 14
+color = Color( 0.12204, 0.363281, 0.125809, 1 )
+shade = 1
+
+

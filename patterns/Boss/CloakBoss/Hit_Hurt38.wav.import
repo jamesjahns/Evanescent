@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Hit_Hurt38.wav-4db82112872939fd4861b2f7fee5d670.sample"
+
+[deps]
+
+source_file="res://patterns/Boss/CloakBoss/Hit_Hurt38.wav"
+source_md5="2daec150a87c86bff333df90355f0382"
+
+dest_files=[ "res://.import/Hit_Hurt38.wav-4db82112872939fd4861b2f7fee5d670.sample" ]
+dest_md5="2fe9a824a0c0ddaf505999146ac79bb9"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

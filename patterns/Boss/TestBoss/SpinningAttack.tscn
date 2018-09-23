@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://patterns/TestBoss/Radial.tscn" type="PackedScene" id=1]
+[ext_resource path="res://patterns/TestBoss/TriShooter.tscn" type="PackedScene" id=2]
+
+[node name="SpinningAttack" type="Node2D"]
+
+
+[node name="RadialBlue" parent="." instance=ExtResource( 1 )]
+
+position = Vector2( 512, 200 )
+shoot_interval = 4.8
+texture = 1
+color = 1
+bullet_num = 20
+speed = 70
+rot_speed = 30.0
+spin = 1.4
+rot = 20.0
+
+[node name="RadialBlue1" parent="." instance=ExtResource( 1 )]
+
+position = Vector2( 512, 200 )
+shoot_interval = 4.8
+shoot_delay = 2.4
+texture = 1
+color = 1
+bullet_num = 20
+speed = 70
+rot_speed = 30.0
+spin = -1.4
+rot = -20.0
+
+[node name="TriShooter" parent="." instance=ExtResource( 2 )]
+
+position = Vector2( 137.398, 93.8658 )
+
+[node name="TriShooter 2" parent="." instance=ExtResource( 2 )]
+
+position = Vector2( 848.873, 95.2262 )

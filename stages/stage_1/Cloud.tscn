@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://stages/stage_1/Cloud.gd" type="Script" id=1]
+[ext_resource path="res://stages/stage_1/clouds.png" type="Texture" id=2]
+
+[node name="Cloud" type="Node2D"]
+
+modulate = Color( 1, 1, 1, 0.156863 )
+scale = Vector2( 0.5, 0.5 )
+z_index = -98
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
+
+[node name="cloud1" type="Sprite" parent="." index="0"]
+
+visible = false
+position = Vector2( 111.314, -15.6704 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 168, 40, 232, 160 )
+_sections_unfolded = [ "Region", "Visibility" ]
+
+[node name="cloud2" type="Sprite" parent="." index="1"]
+
+visible = false
+position = Vector2( 106.991, -25.3969 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 192, 220, 132 )
+_sections_unfolded = [ "Region", "Visibility" ]
+
+[node name="cloud0" type="Sprite" parent="." index="2"]
+
+visible = false
+position = Vector2( 117.258, -35.6638 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 248, 300, 256, 164 )
+_sections_unfolded = [ "Region", "Visibility" ]
+
+

@@ -1,0 +1,32 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/character - Copy.png-e141eb6bb068fa4b37ecfdad9c01b8b7.stex"
+
+[deps]
+
+source_file="res://player/character - Copy.png"
+source_md5="f75d1da5ea9c6cb21b56a54a2e1e94ed"
+
+dest_files=[ "res://.import/character - Copy.png-e141eb6bb068fa4b37ecfdad9c01b8b7.stex" ]
+dest_md5="31baf1ee9bfcb6af0a1efd6a80228157"
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0

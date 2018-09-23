@@ -1,0 +1,145 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://patterns/Generic/TrackPlayer.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"res://patterns/PathPattern.gd\"
+
+const LENGTH = 900
+const GROW = 500
+export var time = 0.0
+var length = LENGTH
+var lines = []
+var angle = 0.0
+
+var shot = false
+export var SPEED = 0.75
+
+class Line:
+	var start_x = 0
+	var end_x = 0
+	var y = 0
+
+func move_bullet(bullet,delta):
+	bullet.pos = bullet.center + path(0)
+
+func path(t):
+	var pos = Vector2(randf() * length, (randf() - 0.5) * 40)
+	return pos.rotated(angle)
+
+func make_pattern():
+	if shot:
+		return
+	shot = true
+	precalc_bullets(100,0)
+
+func _process_with_slow(delta):
+	if !shot:
+		return
+	var collided = false
+	time += delta * SPEED
+	angle = PI / 180 * (cos(time) * 60 + 90)
+	if time > 2 * PI:
+		time -= 2 * PI
+	for line in lines:
+		var y = check_line_collision(line)
+		if(y > 0):
+			collided = true
+			var l = (y - position.y) / sin(angle)
+			if l < length:
+				length = l
+	
+	if !collided:
+		length += GROW * delta
+		if length > LENGTH:
+			length = LENGTH
+
+func check_line_collision(line):
+	var angle1 = (Vector2(line.start_x,line.y) - position).angle()
+	var angle2 = (Vector2(line.end_x,line.y) - position).angle()
+	if angle < angle1 and angle > angle2:
+		return line.y
+	return 0
+
+var wallPattern = preload(\"WallPattern.tscn\")
+
+func _on_Timer_timeout():
+	var w = wallPattern.instance()
+	w.beam = self
+	parent.add_child(w)"
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "extends \"res://patterns/PathPattern.gd\"
+
+const RADIUS = 150
+
+var shot = false
+
+func path(t):
+	return Vector2(cos(2 * PI * t),sin(2 * PI * t)) * RADIUS
+
+func time_slow(t):
+	return t * 0.25
+
+func make_pattern():
+	if shot:
+		return
+	shot = true
+	precalc_bullets(15,1)"
+
+[node name="WalledBeamPattern" type="Node2D" index="0"]
+
+[node name="Beam" type="Node2D" parent="." index="0"]
+
+script = SubResource( 1 )
+shoot_interval = 1.0
+interval_randomness = 0.0
+shoot_delay = 3.0
+slow_affects_shot_rate = true
+sped_up_length = 0.0
+bullet_radius = 7
+color = Color( 0.337255, 0.729412, 0.301961, 1 )
+shade = 1
+lifetime_lim = 3.0
+lasts_forever = true
+destroy_on_path_end = false
+time = 0.0
+SPEED = 0.75
+
+[node name="Timer" type="Timer" parent="Beam" index="0"]
+
+process_mode = 1
+wait_time = 1.2
+one_shot = false
+autostart = true
+
+[node name="Circle" type="Node2D" parent="." index="1"]
+
+script = SubResource( 2 )
+shoot_interval = 1.0
+interval_randomness = 0.0
+shoot_delay = 0.0
+slow_affects_shot_rate = true
+sped_up_length = 0.0
+bullet_radius = 7
+color = Color( 0.337255, 0.729412, 0.301961, 1 )
+shade = 1
+lifetime_lim = 3.0
+lasts_forever = true
+destroy_on_path_end = false
+
+[node name="TrackPlayer" parent="." index="2" instance=ExtResource( 1 )]
+
+shoot_interval = 4.0
+shoot_delay = 8.0
+bullet_radius = 60
+color = Color( 0.337255, 0.729412, 0.301961, 1 )
+shade = 1
+speed = 250
+accel = -50
+
+[connection signal="timeout" from="Beam/Timer" to="Beam" method="_on_Timer_timeout"]
+
+

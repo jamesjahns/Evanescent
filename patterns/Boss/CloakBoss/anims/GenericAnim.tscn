@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../BossAnimation.gd\"
+
+func _ready():
+	boss.move_to(global.from_relative_pos(Vector2(0.5,0.25)))
+"
+
+[node name="GenericAnim" type="Node2D"]
+
+script = SubResource( 1 )
+length = 1.0
+
+

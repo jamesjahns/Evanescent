@@ -1,0 +1,82 @@
+[
+    {
+        "char_id":0,
+        "msg": "",
+        "go_to": 0
+    },
+    {
+        "char_id":1,
+        "msg": "Hey, welcome to the field. You'll be taking over where I left off around here.",
+        "go_to": 2
+    },
+    {
+        "char_id":0,
+        "msg": "Uh, hello.",
+        "go_to": 3
+    },
+    {
+        "char_id":1,
+        "msg":"I won't waste words. Things are pretty simple here—don't get hit, and shoot the enemy. ",
+        "go_to":4
+    },
+    {
+        "char_id":0,
+        "msg":"Got it.",
+        "go_to":5
+    },
+    {
+        "char_id":1,
+        "msg":"Don't interrupt. You will have to get used to your [color=red]time-slow[/color] abilities. They'll allow you to slow certain colors of bullets down.",
+        "go_to":6
+    },
+    {
+        "char_id":1,
+        "msg":"Let me throw an easy attack at you for some practice.",
+        "go_to":7
+    },
+    {
+        "char_id":1,
+        "msg":"Hold [color=red]X[/color] to slow down [color=yellow]light[/color] bullets. Hold [color=red]C[/color] to slow down [color=green]dark[/color] bullets.\n                      ",
+        "go_to":8
+    },
+    {
+        "char_id":0,
+        "msg":"Okay, let's try it out.",
+        "go_to":0
+    },
+    {
+        "char_id":1,
+        "msg":"Good. Told ya it wasn't hard.",
+        "go_to":10
+    },
+    {
+        "char_id":1,
+        "msg":"Now, we're looking for some kinda large monster. Been terrorizing the area for some time now.",
+        "go_to":11
+    },
+    {
+        "char_id":1,
+        "msg":"So, keep an eye out for anything suspicious.",
+        "go_to":0
+    },
+    {
+        "char_id":0,
+        "msg":". . .",
+        "go_to":0
+    },
+    {
+        "char_id":0,
+        "msg":"Oh!",
+        "go_to":14
+    },
+    {
+        "char_id":1,
+        "msg":"You're on your own. Good luck.",
+        "go_to":0
+    },
+    {
+        "char_id":1,
+        "msg":"Okay, that's it. We, uh, don't have a proper ending screen for this. So just close out the game I guess...",
+        "go_to":0
+    }
+]

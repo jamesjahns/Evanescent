@@ -1,0 +1,179 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://particles/square.png" type="Texture" id=1]
+[ext_resource path="res://patterns/Boss/CloakBoss/graphics/Wizard moutain.png" type="Texture" id=2]
+[ext_resource path="res://stages/stage_1/stage_1.png" type="Texture" id=3]
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://stages/StageHelper.tscn" type="PackedScene" id=5]
+[ext_resource path="res://stages/stage_1/CloudsMaker.gd" type="Script" id=6]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../Stage.gd\"
+
+const cloakBoss = preload(\"res://patterns/Boss/CloakBoss/CloakBoss.tscn\")
+const tutPattern = preload(\"PracticePattern.tscn\")
+
+var waited = false
+func _ready():
+	add_to_group(\"events\")
+	get_tree().call_group(\"portrait\",\"start_message\",get_node(\"/root/Global\").start_msg)
+
+func msg_end(msg):
+	match msg:
+		6:
+			add_child(tutPattern.instance())
+			get_node(\"tutorialTimer\").start()
+		-1:
+			get_tree().call_group(\"portrait\",\"start_message\",9)
+		11:
+			get_node(\"waitTimer\").start()
+		13:
+			remove_child(get_node(\"fake_boss\"))
+			var boss = cloakBoss.instance()
+			add_child(boss)
+		
+
+func _on_tutorialTimer_timeout():
+	msg_end(-1)
+
+
+func _on_waitTimer_timeout():
+	if not waited:
+		waited = true
+		get_tree().call_group(\"portrait\",\"start_message\",12)
+	else:
+		get_tree().call_group(\"portrait\",\"start_message\",13)
+		get_node(\"waitTimer\").stop()
+		
+"
+
+[sub_resource type="Animation" id=2]
+
+resource_name = "move_up"
+length = 4.5
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("bg_foreground:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3.2, 4.5 ),
+"transitions": PoolRealArray( 1, 0.25, 1 ),
+"update": 0,
+"values": [ Vector2( 1507.13, 258.303 ), Vector2( 1507.13, 258.303 ), Vector2( 1507.13, 148.303 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+
+resource_name = "start"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("bg_foreground:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1507.13, 258.303 ) ]
+}
+
+[node name="Stage1" type="Node2D"]
+
+z_index = -1
+script = SubResource( 1 )
+_sections_unfolded = [ "Material", "Transform", "Z Index" ]
+
+[node name="bg_background" type="Sprite" parent="." index="0"]
+
+self_modulate = Color( 0.168627, 0.239216, 0.329412, 1 )
+position = Vector2( 357.33, 211.184 )
+scale = Vector2( 794.119, 778.592 )
+z_index = -99
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
+
+[node name="fake_boss" type="Sprite" parent="." index="1"]
+
+position = Vector2( 300, 292.5 )
+scale = Vector2( 0.25, 0.25 )
+z_index = -6
+texture = ExtResource( 2 )
+vframes = 2
+hframes = 3
+frame = 5
+_sections_unfolded = [ "Animation", "Transform", "Z Index" ]
+
+[node name="bg_foreground" type="Sprite" parent="." index="2"]
+
+position = Vector2( 1507.13, 258.303 )
+z_index = -5
+texture = ExtResource( 3 )
+offset = Vector2( -1150.9, 381.948 )
+_sections_unfolded = [ "Material", "Region", "Transform", "Z Index" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Player" parent="." index="3" instance=ExtResource( 4 )]
+
+position = Vector2( 296.813, 652.678 )
+
+[node name="StageHelper" parent="." index="4" instance=ExtResource( 5 )]
+
+visible = false
+position = Vector2( 0, 0 )
+offset = Vector2( 300, 375 )
+_sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="anim" type="AnimationPlayer" parent="." index="5"]
+
+root_node = NodePath("..")
+autoplay = "start"
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/move_up = SubResource( 2 )
+anims/start = SubResource( 3 )
+blend_times = [  ]
+
+[node name="clouds_maker" type="Node2D" parent="." index="6"]
+
+script = ExtResource( 6 )
+
+[node name="Timer" type="Timer" parent="clouds_maker" index="0"]
+
+process_mode = 1
+wait_time = 6.0
+one_shot = false
+autostart = true
+
+[node name="tutorialTimer" type="Timer" parent="." index="7"]
+
+process_mode = 1
+wait_time = 10.0
+one_shot = true
+autostart = false
+
+[node name="waitTimer" type="Timer" parent="." index="8"]
+
+process_mode = 1
+wait_time = 3.0
+one_shot = false
+autostart = false
+
+[connection signal="timeout" from="clouds_maker/Timer" to="clouds_maker" method="_on_Timer_timeout"]
+
+[connection signal="timeout" from="tutorialTimer" to="." method="_on_tutorialTimer_timeout"]
+
+[connection signal="timeout" from="waitTimer" to="." method="_on_waitTimer_timeout"]
+
+

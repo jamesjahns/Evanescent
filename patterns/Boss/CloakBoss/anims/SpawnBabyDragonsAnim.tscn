@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../BossAnimation.gd\"
+
+var baby_dragon = preload(\"../BabyDragon/BabyDragon.tscn\")
+
+func _ready():
+	boss.animation.play(\"call_babies\")
+
+func _on_SpawnDragonsTimer_timeout():
+	for i in range(2):
+		for j in range(2):
+			var b = baby_dragon.instance()
+			boss.baby_dragons[2*i+j] = b
+			parent.add_child(b)
+			b.set_index(2*i+j)
+			b.animation.play(\"entry\")
+
+func on_timeout():
+	for b in boss.baby_dragons:
+		b.attack1()
+	.on_timeout()
+			
+"
+
+[node name="SpawnBabyDragonsAnim" type="Node2D"]
+
+script = SubResource( 1 )
+length = 1.0
+
+[node name="SpawnDragonsTimer" type="Timer" parent="." index="0"]
+
+process_mode = 1
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="SpawnDragonsTimer" to="." method="_on_SpawnDragonsTimer_timeout"]
+
+

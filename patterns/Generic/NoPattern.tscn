@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../Pattern.gd\"
+
+"
+
+[node name="NoPattern" type="Node2D"]
+
+script = SubResource( 1 )
+shoot_interval = -1.0
+interval_randomness = 0.0
+shoot_delay = 0.0
+texture = 0
+color = 0

@@ -1,0 +1,80 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../../RepeatedPattern.gd\"
+
+var move_twds = false
+
+var player_radius = 0
+var last_time = 0
+
+const SHRINK_SPEED = 300
+const EXPAND_SPEED = 300
+const SPEED = 900
+const RAD_MIN = 150
+const RAD_MAX = 300
+const BULLET_SPEED = 170
+const BULLET_ACCEL = -38
+
+var d = 0
+var vel = Vector2()
+var shoot_on = false
+
+onready var center = global.player.position
+
+func _ready():
+	player_radius = (center - position).length()
+	
+func make_pattern():
+	move_twds = !move_twds
+	if(!move_twds):
+		if(repeat_timer == null):
+			return
+		if(shoot_on):
+			repeat_amount = amount_repeated
+			repeat_timer.start()
+			shoot_on = false
+		else:
+			shoot_on = true
+
+func make_repeated_pattern():
+	var b = newBullet()
+	b.velocity = (global.player.position - parent.position).normalized() * BULLET_SPEED
+	b.accel = b.velocity * BULLET_ACCEL / BULLET_SPEED
+	bullets.append(b)
+
+func _process(delta):
+	d = delta
+	if (move_twds):
+		center = global.player.position
+		if player_radius > RAD_MIN:
+			player_radius -= delta * SHRINK_SPEED
+	elif(player_radius < RAD_MAX):
+		player_radius += delta * EXPAND_SPEED
+	player_radius = clamp(player_radius,RAD_MIN,RAD_MAX)
+
+func move_path(time):
+	#bandaid code, TODO: fix
+	var dest = center + Vector2(cos(time * 0.5 * PI ),sin(time * 0.5 * PI )) * player_radius
+	if player_radius <= RAD_MIN or player_radius >= RAD_MAX:
+		return global.to_relative_pos(dest)
+	return global.to_relative_pos((dest- parent.position).normalized() * SPEED * d + parent.position)
+	
+"
+
+[node name="CirclingPlayerPattern" type="Node2D"]
+
+script = SubResource( 1 )
+shoot_interval = 2.0
+interval_randomness = 0.0
+shoot_delay = 0.0
+slow_affects_shot_rate = false
+sped_up_length = 0.0
+bullet_radius = 7
+color = null
+shade = 0
+amount_repeated = 4
+repeat_delay = 0.1
+
+

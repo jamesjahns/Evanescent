@@ -1,0 +1,197 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://patterns/Boss/TestBoss/Paddle.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 300 )
+
+[sub_resource type="CircleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 45.0
+
+[sub_resource type="GDScript" id=3]
+
+script/source = "extends KinematicBody2D
+
+export var speed = 390
+var velocity = Vector2(sqrt(2)/2,sqrt(2)/2) * speed
+var collision_cd = 0.3
+var offscreen_timer = 2
+func _ready():
+	set_process(true)
+	
+func _process(delta):
+	if(get_pos().y < 0 or get_pos().y > 600):
+		offscreen_timer -= delta
+		if(offscreen_timer <= 0):
+			offscreen_timer = 2
+			set_pos(Vector2(512,300))
+	if(collision_cd > 0):
+		collision_cd -= delta
+	move(velocity * delta)
+	if(is_colliding()):
+		var n = get_collision_normal()
+		velocity = n.reflect(velocity)
+		#red
+		get_collider_metadata()
+		if (collision_cd <= 0):
+			collision_cd = 0.3
+			if(n.y > 0.2):
+				get_tree().call_group(0,\"red_paddle\",\"emit\",get_collision_pos(),n)
+			#blue
+			if(n.y < -0.2):
+				get_tree().call_group(0,\"blue_paddle\",\"emit\",get_collision_pos(),n)
+		
+	update()
+
+func _draw():
+	draw_circle(Vector2(512,300) - get_pos(),55,Color(0.2,0.2,0.2,0.6))
+	draw_circle(Vector2(0,0),60,Color(0,0,0))
+	draw_circle(Vector2(0,0),50,Color(1,1,1))
+	
+"
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = PoolVector2Array( 70, -7, 70, 14, -70, 14, -70, -7, 0, -14 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = PoolVector2Array( 70, -7, 70, 14, -70, 14, -70, -7, 0, -14 )
+
+[node name="PongAttack" type="Node2D"]
+
+
+[node name="SideWalls" type="StaticBody2D" parent="."]
+
+input_pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Transform2D( 1, 0, 0, 1, -10, 300 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 1 )
+shapes/1/transform = Transform2D( 1, 0, 0, 1, 1034, 300 )
+shapes/1/trigger = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SideWalls"]
+
+position = Vector2( -10, 300 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="CollisionShape2D1" type="CollisionShape2D" parent="SideWalls"]
+
+position = Vector2( 1034, 300 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 1
+
+[node name="PongBall" type="KinematicBody2D" parent="."]
+
+position = Vector2( 501.779, 169.217 )
+input_pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision_layer = 1
+collision_mask = 1
+collision/margin = 0.08
+script = SubResource( 3 )
+speed = 390
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PongBall"]
+
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BluePaddle" type="Node2D" parent="." groups=[
+"blue_paddle",
+]]
+
+position = Vector2( 474.332, 570 )
+script = ExtResource( 1 )
+shoot_interval = 1.0
+interval_randomness = 0.0
+shoot_delay = 0.0
+texture = 1
+color = 1
+ball_path = NodePath("../PongBall")
+max_speed = 500
+accel = 1800
+num_bullets = 20
+bullet_speed = 100
+
+[node name="body" type="KinematicBody2D" parent="BluePaddle" groups=[
+"blue_paddle",
+]]
+
+input_pickable = false
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision_layer = 1
+collision_mask = 1
+collision/margin = 0.08
+
+[node name="collider" type="CollisionPolygon2D" parent="BluePaddle/body"]
+
+build_mode = 0
+polygon = PoolVector2Array( 0, -14, -70, -7, -70, 14, 70, 14, 70, -7 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="RedPaddle" type="Node2D" parent="." groups=[
+"red_paddle",
+]]
+
+position = Vector2( 474.332, 570 )
+script = ExtResource( 1 )
+shoot_interval = 1.0
+interval_randomness = 0.0
+shoot_delay = 0.0
+texture = 0
+color = 0
+ball_path = NodePath("../PongBall")
+max_speed = 500
+accel = 1800
+num_bullets = 20
+bullet_speed = 100
+
+[node name="body" type="KinematicBody2D" parent="RedPaddle" groups=[
+"red_paddle",
+]]
+
+position = Vector2( 129.226, -540 )
+input_pickable = false
+shapes/0/shape = SubResource( 5 )
+shapes/0/transform = Transform2D( -1, 8.74228e-08, -8.74228e-08, -1, 0, 0 )
+shapes/0/trigger = false
+collision_layer = 1
+collision_mask = 1
+collision/margin = 0.08
+
+[node name="collider" type="CollisionPolygon2D" parent="RedPaddle/body"]
+
+rotation_deg = 180.0
+build_mode = 0
+polygon = PoolVector2Array( 0, -14, -70, -7, -70, 14, 70, 14, 70, -7 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+__meta__ = {
+"_edit_lock_": true
+}

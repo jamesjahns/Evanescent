@@ -1,0 +1,1030 @@
+[gd_scene load_steps=39 format=2]
+
+[ext_resource path="res://patterns/Boss/CloakBoss/CloakBoss.gd" type="Script" id=1]
+[ext_resource path="res://patterns/Boss/CloakBoss/graphics/Tent.png" type="Texture" id=2]
+[ext_resource path="res://patterns/Boss/CloakBoss/graphics/cloak.png" type="Texture" id=3]
+[ext_resource path="res://patterns/Boss/CloakBoss/graphics/Wizard hood.png" type="Texture" id=4]
+[ext_resource path="res://patterns/Boss/CloakBoss/graphics/hat.png" type="Texture" id=5]
+[ext_resource path="res://particles/simple_particle.png" type="Texture" id=6]
+[ext_resource path="res://patterns/Boss/CloakBoss/graphics/wiz special/Wizard-special_0010_Layer-2-copy-13.png" type="Texture" id=7]
+[ext_resource path="res://patterns/Boss/CloakBoss/graphics/wiz special/Wizard-special_0009_Layer-3-copy-10.png" type="Texture" id=8]
+[ext_resource path="res://patterns/Boss/CloakBoss/graphics/wiz special/Wizard-special_0008_Layer-3-copy-13.png" type="Texture" id=9]
+[ext_resource path="res://patterns/Boss/CloakBoss/graphics/wiz special/Wizard-special_0007_Layer-3-copy-18.png" type="Texture" id=10]
+[ext_resource path="res://patterns/Boss/CloakBoss/graphics/wiz special/Wizard-special_0006_Layer-3-copy-20.png" type="Texture" id=11]
+[ext_resource path="res://patterns/Boss/CloakBoss/graphics/wiz special/Wizard-special_0005_Layer-3-copy-22.png" type="Texture" id=12]
+[ext_resource path="res://patterns/Boss/CloakBoss/graphics/wiz special/Wizard-special_0004_Layer-3-copy-26.png" type="Texture" id=13]
+[ext_resource path="res://patterns/Boss/CloakBoss/graphics/wiz special/Wizard-special_0003_Layer-3-copy-30.png" type="Texture" id=14]
+[ext_resource path="res://patterns/Boss/CloakBoss/graphics/wiz special/Wizard-special_0002_Layer-3-copy-34.png" type="Texture" id=15]
+[ext_resource path="res://patterns/Boss/CloakBoss/graphics/wiz special/Wizard-special_0001_Layer-3-copy-36.png" type="Texture" id=16]
+[ext_resource path="res://patterns/Boss/CloakBoss/graphics/wiz special/Wizard-special_0000_Layer-3-copy-40.png" type="Texture" id=17]
+[ext_resource path="res://patterns/Boss/CloakBoss/graphics/Wizard moutain.png" type="Texture" id=18]
+[ext_resource path="res://patterns/Boss/CloakBoss/Hit_Hurt38.wav" type="AudioStream" id=19]
+[ext_resource path="res://patterns/Boss/CloakBoss/prokofiev.ogg" type="AudioStream" id=20]
+[ext_resource path="res://patterns/Boss/CloakBoss/graphics/Wizard death.png" type="Texture" id=21]
+
+[sub_resource type="Animation" id=1]
+
+resource_name = "writhe"
+length = 3.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("tentacles1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 32 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("tentacles2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6, 2.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 32 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("tentacles3:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.4, 1.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 32 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("tentacles4:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 32 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("tentacles5:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1.4, 2.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 32 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("tentacles6:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.2, 1.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 32 ]
+}
+
+[sub_resource type="Animation" id=2]
+
+length = 2.4
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 5, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="Gradient" id=3]
+
+offsets = PoolRealArray( 0.112426, 0.822485 )
+colors = PoolColorArray( 0.168627, 0.239216, 0.329412, 1, 0.172549, 0.239216, 0.329412, 0 )
+
+[sub_resource type="GradientTexture" id=4]
+
+flags = 4
+gradient = SubResource( 3 )
+width = 2048
+
+[sub_resource type="Curve" id=5]
+
+min_value = 0.0
+max_value = 1.0
+bake_resolution = 100
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.997969, 0.231445 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+
+flags = 4
+width = 2048
+curve = SubResource( 5 )
+_sections_unfolded = [ "Resource" ]
+
+[sub_resource type="ParticlesMaterial" id=7]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 2
+emission_box_extents = Vector3( 1, 100, 1 )
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 0.0
+flatness = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 300.0
+initial_velocity_random = 0.0
+angular_velocity = 0.0
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 2.0
+scale_random = 0.0
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 4 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Color", "Emission Shape", "Gravity", "Hue Variation", "Initial Velocity", "Scale", "Spread", "Trail" ]
+
+[sub_resource type="SpriteFrames" id=8]
+
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "idle",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ) ],
+"loop": false,
+"name": "opening",
+"speed": 15.0
+} ]
+
+[sub_resource type="ParticlesMaterial" id=9]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 2
+emission_box_extents = Vector3( 1, 400, 1 )
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 90.0
+flatness = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 300.0
+initial_velocity_random = 0.0
+angular_velocity = 0.0
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 2.0
+scale_random = 0.0
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 4 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Color", "Emission Shape", "Gravity", "Hue Variation", "Initial Velocity", "Scale", "Spread", "Trail" ]
+
+[sub_resource type="Animation" id=10]
+
+length = 2.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("body/cloak:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -2 ), Vector2( 0, 22 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("body/cloak:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.784314 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("body/cloak/head:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.784314 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("body/final_attack:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 4.37025, -91.9445 ), Vector2( 4.37025, -129.945 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+
+resource_name = "call_babies"
+length = 1.0
+loop = false
+step = 0.1
+
+[sub_resource type="Animation" id=12]
+
+resource_name = "death"
+length = 1.5
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("body/final_attack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 10, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("body/final_attack:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("body/tentacles:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ), Vector2( 1, 1 ), Vector2( 0.01, 0.01 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("death:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("death:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 11 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+
+length = 4.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("body/cloak/fog:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("body/hiding_mountain:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.7, 0.8, 0.9, 1, 1.1, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 5, 5, 4, 3, 2, 1, 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("body/hiding_mountain:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("body:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.2, 1.7, 2, 3.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, -1600 ), Vector2( 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("body/final_attack:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("body/tentacles:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 4.37025, -4.49353 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("body/tentacles:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath(".:z_index")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ -9, -3 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("body/cloak:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=14]
+
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("body/final_attack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("body/final_attack:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("body/cloak:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("body/tentacles:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("body/tentacles:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 2, 2 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("body/tentacles:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 4.37025, -81.5743 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("body/tentacles:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("body/tentacles:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=16]
+
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("body/hiding_mountain:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("body/tentacles:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("body/cloak:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("body/cloak/fog:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("body/final_attack:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("body/cloak:self_modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("body/cloak/head:self_modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("body/hiding_mountain:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 5 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("body:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath(".:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("death:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="CapsuleShape2D" id=17]
+
+custom_solver_bias = 0.0
+radius = 30.6252
+height = 359.028
+
+[node name="CloakBoss" type="Area2D" index="0"]
+
+modulate = Color( 1, 1, 1, 0.993889 )
+scale = Vector2( 0.5, 0.5 )
+z_index = -3
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
+interp_length = 0.5
+
+[node name="body" type="Node2D" parent="." index="0"]
+
+_sections_unfolded = [ "Transform", "Visibility" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="tentacles" type="Node2D" parent="body" index="0"]
+
+editor/display_folded = true
+visible = false
+show_behind_parent = true
+position = Vector2( 4.37025, -81.5743 )
+scale = Vector2( 2, 2 )
+z_index = -2
+_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
+
+[node name="tentacles1" type="Sprite" parent="body/tentacles" index="0"]
+
+show_behind_parent = true
+position = Vector2( -82.5337, 48.3522 )
+rotation = -0.721185
+texture = ExtResource( 2 )
+offset = Vector2( -16.7179, -132.505 )
+flip_h = true
+vframes = 6
+hframes = 6
+frame = 28
+_sections_unfolded = [ "Visibility" ]
+
+[node name="tentacles2" type="Sprite" parent="body/tentacles" index="1"]
+
+show_behind_parent = true
+position = Vector2( -67.4427, -17.816 )
+rotation = -1.44532
+texture = ExtResource( 2 )
+offset = Vector2( -26.8445, -142.854 )
+flip_h = true
+vframes = 6
+hframes = 6
+frame = 15
+
+[node name="tentacles3" type="Sprite" parent="body/tentacles" index="2"]
+
+show_behind_parent = true
+position = Vector2( -53.0971, 56.786 )
+rotation = -1.33757
+texture = ExtResource( 2 )
+offset = Vector2( -28.2667, -142.534 )
+flip_h = true
+vframes = 6
+hframes = 6
+frame = 21
+
+[node name="tentacles4" type="Sprite" parent="body/tentacles" index="3"]
+
+show_behind_parent = true
+position = Vector2( 92.166, 7.59267 )
+rotation = 1.70583
+texture = ExtResource( 2 )
+offset = Vector2( 19.8424, -134.864 )
+vframes = 6
+hframes = 6
+frame = 8
+
+[node name="tentacles5" type="Sprite" parent="body/tentacles" index="4"]
+
+show_behind_parent = true
+position = Vector2( 76.2576, 39.9295 )
+rotation = 1.13138
+texture = ExtResource( 2 )
+offset = Vector2( 8.11912, -147.914 )
+vframes = 6
+hframes = 6
+
+[node name="tentacles6" type="Sprite" parent="body/tentacles" index="5"]
+
+show_behind_parent = true
+position = Vector2( 76.2576, 55.8341 )
+rotation = 0.543224
+texture = ExtResource( 2 )
+offset = Vector2( 25.0237, -151.47 )
+vframes = 6
+hframes = 6
+frame = 24
+
+[node name="writhe_anim" type="AnimationPlayer" parent="body/tentacles" index="6"]
+
+root_node = NodePath("..")
+autoplay = "writhe"
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/writhe = SubResource( 1 )
+blend_times = [  ]
+
+[node name="cloak" type="Sprite" parent="body" index="1"]
+
+position = Vector2( 0, 8.91919 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
+
+[node name="inside" type="Sprite" parent="body/cloak" index="0"]
+
+editor/display_folded = true
+position = Vector2( -0.0572963, -58.4538 )
+scale = Vector2( 0.458876, 0.458876 )
+texture = ExtResource( 4 )
+hframes = 6
+_sections_unfolded = [ "Visibility" ]
+
+[node name="blink_anim" type="AnimationPlayer" parent="body/cloak/inside" index="0"]
+
+root_node = NodePath("..")
+autoplay = "blink"
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/blink = SubResource( 2 )
+blend_times = [  ]
+
+[node name="head" type="Sprite" parent="body/cloak" index="1"]
+
+show_behind_parent = true
+position = Vector2( 6.82269, -153.783 )
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="fog" type="Particles2D" parent="body/cloak" index="2"]
+
+visible = false
+show_behind_parent = true
+position = Vector2( 1.75503, 57.6177 )
+rotation = 1.5708
+scale = Vector2( 0.571536, 0.571536 )
+emitting = true
+amount = 128
+lifetime = 1.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = true
+draw_order = 0
+process_material = SubResource( 7 )
+texture = ExtResource( 6 )
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Transform", "Visibility" ]
+
+[node name="final_attack" type="AnimatedSprite" parent="body" index="2"]
+
+position = Vector2( 4.37025, -109.574 )
+scale = Vector2( 1.04893, 1.04893 )
+frames = SubResource( 8 )
+animation = "opening"
+frame = 10
+playing = true
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="Particles2D" type="Particles2D" parent="body/final_attack" index="0"]
+
+show_behind_parent = true
+position = Vector2( -5.38784, 155.02 )
+rotation = 1.5708
+scale = Vector2( 0.571536, 0.571536 )
+emitting = true
+amount = 128
+lifetime = 1.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = true
+draw_order = 0
+process_material = SubResource( 9 )
+texture = ExtResource( 6 )
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Drawing", "Process Material" ]
+
+[node name="hiding_mountain" type="Sprite" parent="body" index="3"]
+
+position = Vector2( 0, -45 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 18 )
+vframes = 2
+hframes = 3
+frame = 5
+_sections_unfolded = [ "Animation", "Transform", "Visibility" ]
+
+[node name="bobbing_anim" type="AnimationPlayer" parent="." index="1"]
+
+root_node = NodePath("..")
+autoplay = "bobbing"
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/bobbing = SubResource( 10 )
+blend_times = [  ]
+
+[node name="anim" type="AnimationPlayer" parent="." index="2"]
+
+root_node = NodePath("..")
+autoplay = "start"
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/call_babies = SubResource( 11 )
+anims/death = SubResource( 12 )
+anims/entry = SubResource( 13 )
+anims/final_attack = SubResource( 14 )
+anims/grow_tentacles = SubResource( 15 )
+anims/start = SubResource( 16 )
+blend_times = [  ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+
+visible = false
+position = Vector2( -2.06976, -46.2983 )
+scale = Vector2( 5.06171, 1 )
+shape = SubResource( 17 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="sounds" type="AudioStreamPlayer2D" parent="." index="4"]
+
+stream = ExtResource( 19 )
+volume_db = -20.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[node name="music" type="AudioStreamPlayer2D" parent="." index="5"]
+
+stream = ExtResource( 20 )
+volume_db = 0.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[node name="death" type="Sprite" parent="." index="6"]
+
+visible = false
+position = Vector2( 19.9834, -48.2874 )
+texture = ExtResource( 21 )
+vframes = 3
+hframes = 4
+_sections_unfolded = [ "Animation", "Visibility" ]
+
+

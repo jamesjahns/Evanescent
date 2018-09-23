@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"res://patterns/Boss/BossAnimation.gd\"
+
+func _ready():
+	boss.animation.play(\"grow_tentacles\")"
+
+[node name="GrowTentaclesAnim" type="Node2D"]
+
+script = SubResource( 1 )
+length = 1.0
+
+

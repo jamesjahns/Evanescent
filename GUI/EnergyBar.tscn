@@ -1,0 +1,178 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://GUI/energy_bar.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "extends Sprite
+
+onready var global = get_node(\"/root/Global\")
+
+func _process(delta):
+	set_scale(Vector2(global.energy,1))
+	"
+
+[sub_resource type="Animation" id=1]
+
+resource_name = "fill_color"
+length = 3.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.141037, 0.797034, 0.925781, 1 ), Color( 0.427917, 0.586158, 0.960938, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+
+resource_name = "idle"
+length = 2.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 3.99954, -1.58325 ), Vector2( 3.99954, 2.86119 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("hilt/wing_left:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -123.48, 26.9784 ), Vector2( -119.036, 26.9784 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("hilt/wing_right:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 117.549, 26.6115 ), Vector2( 113.105, 26.6115 ) ]
+}
+
+[node name="EnergyBar" type="Node2D"]
+
+scale = Vector2( 0.9, 0.9 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="hilt" type="Sprite" parent="." index="0"]
+
+position = Vector2( 1.20287, 37.0768 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 216, 723.62, 184, 80 )
+_sections_unfolded = [ "Region" ]
+
+[node name="wing_left" type="Sprite" parent="hilt" index="0"]
+
+position = Vector2( -121.179, 26.9784 )
+z_index = -1
+texture = ExtResource( 1 )
+flip_h = true
+region_enabled = true
+region_rect = Rect2( 416, 708.468, 240, 172 )
+_sections_unfolded = [ "Offset", "Region", "Transform", "Z Index" ]
+
+[node name="wing_right" type="Sprite" parent="hilt" index="1"]
+
+position = Vector2( 115.247, 26.6115 )
+z_index = -1
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 416, 708.468, 240, 172 )
+_sections_unfolded = [ "Region", "Transform", "Visibility", "Z Index" ]
+
+[node name="hilt2" type="Sprite" parent="hilt" index="2"]
+
+position = Vector2( -0.539413, 63.0996 )
+z_index = -1
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 220, 799.62, 176, 192.848 )
+_sections_unfolded = [ "Region", "Z Index" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="bar_outline" type="Sprite" parent="." index="1"]
+
+position = Vector2( -2.70181, -22.9316 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 88, 481.548, 450, 97 )
+_sections_unfolded = [ "Region" ]
+
+[node name="bar_bg" type="Sprite" parent="bar_outline" index="0"]
+
+position = Vector2( 4.78253, -3.7018 )
+z_index = -1
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 103, 418.548, 424, 63 )
+_sections_unfolded = [ "Region", "Z Index" ]
+
+[node name="bar_fill" type="Sprite" parent="bar_outline" index="1"]
+
+modulate = Color( 0.416866, 0.594281, 0.959583, 1 )
+position = Vector2( -207.222, -4.11605 )
+z_index = -1
+texture = ExtResource( 1 )
+offset = Vector2( 212.005, 0.414249 )
+region_enabled = true
+region_rect = Rect2( 103, 418.548, 424, 63 )
+script = SubResource( 2 )
+_sections_unfolded = [ "Material", "Offset", "Region", "Transform", "Visibility", "Z Index" ]
+
+[node name="fill_color" type="AnimationPlayer" parent="bar_outline/bar_fill" index="0"]
+
+root_node = NodePath("..")
+autoplay = "fill_color"
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/fill_color = SubResource( 1 )
+blend_times = [  ]
+
+[node name="head" type="Sprite" parent="." index="2"]
+
+position = Vector2( 3.99954, 0.718647 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 224, 595.62, 172, 128 )
+_sections_unfolded = [ "Region", "Transform" ]
+
+[node name="idle" type="AnimationPlayer" parent="." index="3"]
+
+root_node = NodePath("..")
+autoplay = "idle"
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/idle = SubResource( 3 )
+blend_times = [  ]
+
+

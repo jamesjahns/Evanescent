@@ -1,0 +1,336 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://player/Player.gd" type="Script" id=1]
+[ext_resource path="res://player/right.png" type="Texture" id=2]
+[ext_resource path="res://player/left.png" type="Texture" id=3]
+[ext_resource path="res://player/forward.png" type="Texture" id=4]
+[ext_resource path="res://player/back.png" type="Texture" id=5]
+[ext_resource path="res://particles/simple_particle.png" type="Texture" id=6]
+[ext_resource path="res://player/heartbeat.png" type="Texture" id=7]
+[ext_resource path="res://player/screen clear.png" type="Texture" id=8]
+[ext_resource path="res://particles/square.png" type="Texture" id=9]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": false,
+"name": "default",
+"speed": 0.0
+} ]
+
+[sub_resource type="Gradient" id=2]
+
+offsets = PoolRealArray( 0.0236686, 0.988166 )
+colors = PoolColorArray( 0.230469, 0.0747223, 0.16963, 0.0828627, 0.227451, 0.0745098, 0.168627, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+
+flags = 4
+gradient = SubResource( 2 )
+width = 2048
+
+[sub_resource type="Curve" id=4]
+
+min_value = 0.0
+max_value = 1.0
+bake_resolution = 100
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.381836 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+
+flags = 4
+width = 2048
+curve = SubResource( 4 )
+_sections_unfolded = [ "Resource" ]
+
+[sub_resource type="ParticlesMaterial" id=6]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 0
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 20.0
+flatness = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 30.0
+initial_velocity_random = 0.0
+angular_velocity = 0.0
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 1.0
+scale = 0.5
+scale_random = 0.0
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Angle", "Animation", "Color", "Damping", "Hue Variation", "Linear Accel", "Spread" ]
+
+[sub_resource type="Animation" id=7]
+
+length = 0.5
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("body:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+
+length = 1.0
+loop = false
+step = 0.1
+
+[sub_resource type="Animation" id=9]
+
+length = 1.0
+loop = false
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("screen_clear_body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 5, 4, 3, 2, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("body:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("screen_clear_body:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+
+length = 2.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("hitbox_outline:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 5 ]
+}
+
+[sub_resource type="CircleShape2D" id=11]
+
+custom_solver_bias = 0.0
+radius = 4.0
+
+[sub_resource type="GDScript" id=12]
+
+script/source = "extends Sprite
+
+onready var global = get_node('/root/Global')
+const SCALE = 70
+
+func _process(delta):
+	if Input.is_action_pressed(\"slow_light\") or Input.is_action_pressed(\"slow_dark\"):
+		visible = true
+	else: 
+		visible = false
+	scale.x = global.energy * SCALE
+"
+
+[node name="Player" type="KinematicBody2D"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Z Index" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="body" type="AnimatedSprite" parent="." index="0"]
+
+position = Vector2( -0.0249596, -0.0222483 )
+scale = Vector2( 0.15, 0.15 )
+frames = SubResource( 1 )
+animation = "default"
+offset = Vector2( 0.327805, 10.8204 )
+_sections_unfolded = [ "Animation", "Visibility" ]
+
+[node name="Particles2D" type="Particles2D" parent="body" index="0"]
+
+position = Vector2( 0.557811, 153.738 )
+rotation = 1.5708
+scale = Vector2( 6.66667, 6.66667 )
+emitting = true
+amount = 32
+lifetime = 1.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 8.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = false
+draw_order = 0
+process_material = SubResource( 6 )
+texture = ExtResource( 6 )
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time", "Transform" ]
+
+[node name="BulletTimer" type="Timer" parent="." index="1"]
+
+process_mode = 1
+wait_time = 0.1
+one_shot = false
+autostart = true
+
+[node name="anim" type="AnimationPlayer" parent="." index="2"]
+
+root_node = NodePath("..")
+autoplay = "normal"
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/invincible = SubResource( 7 )
+anims/normal = SubResource( 8 )
+anims/screen_clear = SubResource( 9 )
+blend_times = [  ]
+
+[node name="hitbox" type="Sprite" parent="." index="3"]
+
+visible = false
+self_modulate = Color( 1, 0, 0, 1 )
+scale = Vector2( 0.06, 0.06 )
+texture = ExtResource( 7 )
+offset = Vector2( -9.06547, 6.67698 )
+hframes = 6
+frame = 2
+_sections_unfolded = [ "Animation", "Transform", "Visibility", "Z Index" ]
+
+[node name="idle" type="AnimationPlayer" parent="hitbox" index="0"]
+
+root_node = NodePath("..")
+autoplay = "idle"
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/idle = SubResource( 10 )
+blend_times = [  ]
+
+[node name="hitbox_outline" type="Sprite" parent="hitbox" index="1"]
+
+show_behind_parent = true
+scale = Vector2( 1.16667, 1.16667 )
+texture = ExtResource( 7 )
+offset = Vector2( -9.06547, 6.67698 )
+hframes = 6
+frame = 2
+_sections_unfolded = [ "Animation", "Transform", "Visibility", "Z Index" ]
+
+[node name="true_hitbox" type="Sprite" parent="." index="4"]
+
+modulate = Color( 1, 1, 1, 0.552471 )
+self_modulate = Color( 0.882813, 0.500031, 0.500031, 1 )
+scale = Vector2( 0.16, 0.16 )
+texture = ExtResource( 6 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="5"]
+
+visible = false
+shape = SubResource( 11 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="screen_clear_body" type="Sprite" parent="." index="6"]
+
+modulate = Color( 1, 1, 1, 0 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 8 )
+normal_map = ExtResource( 8 )
+hframes = 6
+_sections_unfolded = [ "Animation", "Transform", "Visibility" ]
+
+[node name="energy_bar" type="Sprite" parent="." index="7"]
+
+modulate = Color( 1, 1, 1, 0.541451 )
+self_modulate = Color( 0.761719, 0.729918, 0.252914, 1 )
+position = Vector2( 0, 45 )
+scale = Vector2( 70, 5 )
+texture = ExtResource( 9 )
+centered = false
+offset = Vector2( -0.5, -0.5 )
+script = SubResource( 12 )
+_sections_unfolded = [ "Material", "Offset", "Transform", "Visibility" ]
+
+[connection signal="timeout" from="BulletTimer" to="." method="_on_BulletTimer_timeout"]
+
+

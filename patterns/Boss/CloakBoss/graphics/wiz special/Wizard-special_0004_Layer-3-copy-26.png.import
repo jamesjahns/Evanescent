@@ -1,0 +1,32 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/Wizard-special_0004_Layer-3-copy-26.png-f4c734d7c8a61e610aeb84064133f750.stex"
+
+[deps]
+
+source_file="res://patterns/Boss/CloakBoss/graphics/wiz special/Wizard-special_0004_Layer-3-copy-26.png"
+source_md5="613fccb5e1850e9ac4bd9d1a7a9a527f"
+
+dest_files=[ "res://.import/Wizard-special_0004_Layer-3-copy-26.png-f4c734d7c8a61e610aeb84064133f750.stex" ]
+dest_md5="598efe69e4f09d501f20d8d82a1a842c"
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0

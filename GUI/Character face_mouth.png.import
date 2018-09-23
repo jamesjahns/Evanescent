@@ -1,0 +1,32 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/Character face_mouth.png-acc77265bad29405c2eac04778813585.stex"
+
+[deps]
+
+source_file="res://GUI/Character face_mouth.png"
+source_md5="72bde8228a2b277d672049dd3b234ce3"
+
+dest_files=[ "res://.import/Character face_mouth.png-acc77265bad29405c2eac04778813585.stex" ]
+dest_md5="629cb237d4d21070d843f138405798db"
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0

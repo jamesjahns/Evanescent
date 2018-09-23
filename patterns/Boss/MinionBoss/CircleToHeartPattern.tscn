@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://patterns/Generic/Radial.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../Pattern.gd\"
+
+export var num_bullets = 15
+export var bullet_speed = 100
+export var radius = 100
+export var accel = 30
+func make_pattern():
+	var dir =  (global.player.get_global_pos() - get_global_pos()).normalized()
+	for i in range(num_bullets):
+		var b = newBullet()
+		var offset = dir.rotated(i * 2 * PI / num_bullets)
+		b.pos += offset * radius
+		b.velocity = bullet_speed * dir
+		#rotate 90 deg and dot product to scale accel
+		b.accel = abs(offset.y * dir.x - offset.x * dir.y) * dir * accel
+		bullets.append(b)
+		
+"
+
+[node name="CircleToHeartPattern" type="Node2D"]
+
+
+[node name="CircleToHeart" type="Node2D" parent="."]
+
+script = SubResource( 1 )
+shoot_interval = 1.0
+shoot_delay = 0.0
+texture = 0
+color = 0
+num_bullets = 15
+bullet_speed = 100
+radius = 100
+accel = 30
+
+[node name="Radial" parent="." instance=ExtResource( 1 )]
+
+texture = 1
+color = 1
+bullet_num = 10
+speed = 50
+rot_speed = 1.0

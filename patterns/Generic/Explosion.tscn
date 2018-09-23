@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=2]
+
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../Pattern.gd\"
+
+export var num_bullets = 0
+export var min_speed = 0
+export var max_speed = 0
+export var min_angle = 0
+export var max_angle = 0
+
+func _ready():
+	min_angle *= PI / 180
+	max_angle *= PI / 180
+
+func make_pattern():
+	for i in range(num_bullets):
+		var b= newBullet()
+		var randAngle = min_angle + randf() * (max_angle - min_angle)
+		b.velocity = Vector2(cos(randAngle),sin(randAngle)) * (min_speed + randf() * (max_speed - min_speed))
+		bullets.append(b)
+"
+
+[node name="Explosion" type="Node2D"]
+
+script = SubResource( 1 )
+shoot_interval = 1.0
+shoot_delay = 0.0
+texture = 0
+color = 0
+num_bullets = 0
+min_speed = 0
+max_speed = 0
+min_angle = 0
+max_angle = 0
