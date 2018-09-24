@@ -1,6 +1,15 @@
 A simple, proof-of-concept game in the "bullet hell" genre, made in the fantastic [Godot Engine](https://godotengine.org/). Made in collaboration with artist [@trife42](https://www.instagram.com/trife42/).
 ----
 
+![tentacle attack](/gifs_for_readme/gif1.gif?raw=true)
+
+![baby dragon attack](/gifs_for_readme/gif3.gif?raw=true)
+
+![dialogue system](/gifs_for_readme/gif2.gif?raw=true)
+
+
+
+
 This is a proof-of-concept, minimum working product demo, mostly intended as a learning experience. Expect things to be rough around the edges and many obvious features (e.g. most sound effects, correct music) to be missing. Those looking into the code should also expect things to (unfortunately) be messy and poorly documented.
 
 Only a single boss battle is implemented, and it is meant to be fairly difficult. You have infinite lives in this demo.
